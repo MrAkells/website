@@ -1,0 +1,44 @@
+---
+import PageHeader from '../../components/PageHeader.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import { minecraftServers } from '../../data/minecraft';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Minecraft" description="Minecraft сборки.">
+	<PageHeader title="Minecraft" breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Minecraft' }]} />
+
+	<section class="border-t border-[var(--color-border)] pt-10">
+		<div class="grid gap-4 md:grid-cols-2">
+			<a class="group block overflow-hidden rounded-sm bg-[var(--color-surface)] outline outline-1 outline-[var(--color-border)]" href="/minecraft/gt-new-horizons/">
+				<div class="relative aspect-[16/10] bg-[var(--color-surface-muted)]">
+					<img
+						class="size-full object-cover opacity-90 transition group-hover:opacity-100"
+						src="/images/minecraft/gtnh.webp"
+						alt=""
+						loading="lazy"
+					/>
+					<div class="absolute right-4 top-4">
+						<StatusBadge label={minecraftServers.gtnh.status} />
+					</div>
+				</div>
+				<h2 class="p-5 text-xl text-[var(--color-text)]">GregTech: New Horizons</h2>
+			</a>
+
+			<a class="group block overflow-hidden rounded-sm bg-[var(--color-surface)] outline outline-1 outline-[var(--color-border)]" href="/minecraft/ftb-stoneblock-4/">
+				<div class="relative aspect-[16/10] bg-[var(--color-surface-muted)]">
+					<img
+						class="size-full object-cover opacity-90 transition group-hover:opacity-100"
+						src="/images/minecraft/stoneblock.webp"
+						alt=""
+						loading="lazy"
+					/>
+					<div class="absolute right-4 top-4">
+						<StatusBadge label={minecraftServers.stoneblock.status} />
+					</div>
+				</div>
+				<h2 class="p-5 text-xl text-[var(--color-text)]">FTB StoneBlock 4</h2>
+			</a>
+		</div>
+	</section>
+</BaseLayout>

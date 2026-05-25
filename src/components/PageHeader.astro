@@ -1,0 +1,33 @@
+---
+type Props = {
+	title: string;
+	breadcrumbs?: {
+		label: string;
+		href?: string;
+	}[];
+};
+
+const { title, breadcrumbs = [] } = Astro.props;
+---
+
+<div slot="header" class="space-y-4">
+	<h1 class="text-4xl font-bold tracking-wide md:text-5xl">{title}</h1>
+	{
+		breadcrumbs.length > 0 && (
+			<nav class="flex flex-wrap items-center gap-2 text-sm text-[var(--color-text-muted)]">
+				{breadcrumbs.map((item, index) => (
+					<>
+						{index > 0 && <span>/</span>}
+						{item.href ? (
+							<a class="text-[var(--color-link)] hover:text-[var(--color-text)]" href={item.href}>
+								{item.label}
+							</a>
+						) : (
+							<span>{item.label}</span>
+						)}
+					</>
+				))}
+			</nav>
+		)
+	}
+</div>

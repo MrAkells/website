@@ -1,0 +1,27 @@
+---
+import PageHeader from '../../../components/PageHeader.astro';
+import ServerStatus from '../../../components/ServerStatus.astro';
+import SectionBlock from '../../../components/SectionBlock.astro';
+import { minecraftServers } from '../../../data/minecraft';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="FTB StoneBlock 4" description="Костяк страницы сборки FTB StoneBlock 4.">
+	<PageHeader
+		title="FTB StoneBlock 4"
+		breadcrumbs={[
+			{ label: 'Home', href: '/' },
+			{ label: 'Minecraft', href: '/minecraft/' },
+			{ label: 'FTB StoneBlock 4' },
+		]}
+	/>
+
+	<SectionBlock title="Status" class="border-t border-[var(--color-border)]">
+		<ServerStatus
+			status={minecraftServers.stoneblock.status}
+			address={minecraftServers.stoneblock.address}
+			version={minecraftServers.stoneblock.version}
+			players={minecraftServers.stoneblock.players}
+		/>
+	</SectionBlock>
+</BaseLayout>

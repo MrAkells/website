@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+
+<BaseLayout title="mrakells.com" description="Минимальная главная страница.">
+	<PageHeader title="mrakells.com" />
+
+	<section class="border-t border-[var(--color-border)] pt-5">
+		<h2 class="mb-4 border-l-2 border-[var(--color-accent)] pl-3 text-xl">Pages</h2>
+		<ul class="list-disc space-y-2 pl-5 text-[var(--color-text-muted)]">
+			<li>
+				<a class="text-[var(--color-link)] underline hover:text-[var(--color-text)]" href="/minecraft/">Minecraft</a>
+			</li>
+		</ul>
+	</section>
+</BaseLayout>

@@ -1,0 +1,13 @@
+---
+type Props = {
+	title: string;
+	class?: string;
+};
+
+const { title, class: className = '' } = Astro.props;
+---
+
+<section class:list={['border border-[var(--color-border)] bg-[var(--color-surface)] p-5', className]}>
+	<h2 class="mb-4 border-l-2 border-[var(--color-accent)] pl-3 text-xl">{title}</h2>
+	<slot />
+</section>

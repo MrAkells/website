@@ -1,0 +1,31 @@
+---
+import StatusBadge from './StatusBadge.astro';
+
+type Props = {
+	address: string;
+	version: string;
+	players: string;
+	status?: string;
+};
+
+const { address, version, players, status = 'good question' } = Astro.props;
+---
+
+<div class="mb-6">
+	<StatusBadge label={status} />
+</div>
+
+<dl class="grid gap-6 text-sm sm:grid-cols-3">
+	<div>
+		<dt class="mb-2 text-xs uppercase tracking-widest text-[var(--color-text-muted)]">Address</dt>
+		<dd>{address}</dd>
+	</div>
+	<div>
+		<dt class="mb-2 text-xs uppercase tracking-widest text-[var(--color-text-muted)]">Version</dt>
+		<dd>{version}</dd>
+	</div>
+	<div>
+		<dt class="mb-2 text-xs uppercase tracking-widest text-[var(--color-text-muted)]">Players</dt>
+		<dd>{players}</dd>
+	</div>
+</dl>

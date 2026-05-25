@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import ServerStatus from '../../../components/ServerStatus.astro';
+import SectionBlock from '../../../components/SectionBlock.astro';
+import { minecraftServers } from '../../../data/minecraft';
+---
+
+<BaseLayout title="GT New Horizons" description="Костяк страницы сборки GT New Horizons.">
+	<PageHeader
+		title="GregTech: New Horizons"
+		breadcrumbs={[
+			{ label: 'Home', href: '/' },
+			{ label: 'Minecraft', href: '/minecraft/' },
+			{ label: 'GregTech: New Horizons' },
+		]}
+	/>
+
+	<SectionBlock title="Status" class="border-t border-[var(--color-border)]">
+		<ServerStatus
+			status={minecraftServers.gtnh.status}
+			address={minecraftServers.gtnh.address}
+			version={minecraftServers.gtnh.version}
+			players={minecraftServers.gtnh.players}
+		/>
+	</SectionBlock>
+
+	<SectionBlock title="Map">
+		<iframe
+			class="aspect-video w-full bg-[var(--color-surface-muted)]"
+			src="https://gtnh.mrakells.com/map"
+			title="GT New Horizons map"
+			loading="lazy"
+		></iframe>
+	</SectionBlock>
+</BaseLayout>
