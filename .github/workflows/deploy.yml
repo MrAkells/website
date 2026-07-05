@@ -1,13 +1,9 @@
 name: Deploy site
 
 on:
-  workflow_dispatch:
-    inputs:
-      clean_target:
-        description: Delete files on server that are missing from dist
-        required: true
-        default: false
-        type: boolean
+  push:
+    branches:
+      - main
 
 concurrency:
   group: deploy-site
@@ -15,9 +11,9 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: docker
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
@@ -33,13 +29,15 @@ jobs:
       - name: Configure SSH
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
         run: |
           set -eu
           install -m 700 -d ~/.ssh
           printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          DEPLOY_PORT="${DEPLOY_PORT:-22}"
+          ssh-keyscan -p "$DEPLOY_PORT" "$DEPLOY_HOST" > ~/.ssh/known_hosts
 
       - name: Upload dist
         env:
@@ -53,9 +51,7 @@ jobs:
           : "${DEPLOY_USER:?Missing DEPLOY_USER variable}"
           : "${DEPLOY_PATH:?Missing DEPLOY_PATH variable}"
           DEPLOY_PORT="${DEPLOY_PORT:-22}"
-
-          if [ "${{ inputs.clean_target }}" = "true" ]; then
-            rsync -az --delete -e "ssh -p $DEPLOY_PORT" dist/ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/"
-          else
-            rsync -az -e "ssh -p $DEPLOY_PORT" dist/ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/"
-          fi
+          REMOTE_TMP="~/website-deploy-tmp"
+          ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "rm -rf $REMOTE_TMP && mkdir -p $REMOTE_TMP"
+          rsync -az --delete -e "ssh -p $DEPLOY_PORT" dist/ "$DEPLOY_USER@$DEPLOY_HOST:$REMOTE_TMP/"
+          ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "sudo mkdir -p '$DEPLOY_PATH' && sudo rsync -az --delete $REMOTE_TMP/ '$DEPLOY_PATH/' && sudo chown -R www-data:www-data '$DEPLOY_PATH' && rm -rf $REMOTE_TMP"
