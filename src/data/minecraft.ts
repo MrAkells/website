@@ -5,10 +5,4 @@ export const minecraftServers = {
 		version: 'soon',
 		players: 'soon',
 	},
-	stoneblock: {
-		status: 'what?',
-		address: 'soon',
-		version: 'soon',
-		players: 'soon',
-	},
 } as const;
