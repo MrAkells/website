@@ -1,0 +1,61 @@
+name: Deploy site
+
+on:
+  workflow_dispatch:
+    inputs:
+      clean_target:
+        description: Delete files on server that are missing from dist
+        required: true
+        default: false
+        type: boolean
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: docker
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          set -eu
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Upload dist
+        env:
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+        run: |
+          set -eu
+          : "${DEPLOY_HOST:?Missing DEPLOY_HOST variable}"
+          : "${DEPLOY_USER:?Missing DEPLOY_USER variable}"
+          : "${DEPLOY_PATH:?Missing DEPLOY_PATH variable}"
+          DEPLOY_PORT="${DEPLOY_PORT:-22}"
+
+          if [ "${{ inputs.clean_target }}" = "true" ]; then
+            rsync -az --delete -e "ssh -p $DEPLOY_PORT" dist/ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/"
+          else
+            rsync -az -e "ssh -p $DEPLOY_PORT" dist/ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/"
+          fi
