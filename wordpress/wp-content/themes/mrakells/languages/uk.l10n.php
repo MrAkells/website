@@ -60,6 +60,10 @@ return array(
 		'open in full screen'                      => 'відкрити на весь екран',
 		'Live map: %s'                             => 'Жива мапа: %s',
 
+		// Превью ссылок.
+		'Posts from the %s blog.'                  => 'Записи з блогу %s.',
+		'Posts tagged #%1$s on %2$s.'              => 'Записи з міткою #%1$s на %2$s.',
+
 		// Админка.
 		'Header navigation'                        => 'Навігація в шапці',
 		'Links on the front page'                  => 'Посилання на головній',

@@ -6,6 +6,7 @@
 declare( strict_types=1 );
 
 require get_theme_file_path( 'inc/i18n.php' );
+require get_theme_file_path( 'inc/seo.php' );
 require get_theme_file_path( 'inc/minecraft.php' );
 require get_theme_file_path( 'inc/heads.php' );
 require get_theme_file_path( 'inc/quests.php' );
