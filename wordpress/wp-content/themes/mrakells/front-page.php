@@ -60,7 +60,10 @@ $links     = mrakells_links();
 	</div>
 
 	<div class="pixel-plate order-first mr-[11px] size-[132px] lg:order-none lg:mr-[22px] lg:size-[264px]">
-		<?php mrakells_avatar( 'size-full', get_bloginfo( 'name' ) ); ?>
+		<?php // Под курсором голова превращается в фотографию — см. src/js/face.js. ?>
+		<div class="size-full" data-face="<?php echo esc_url( get_theme_file_uri( 'images/me.jpg' ) ); ?>">
+			<?php mrakells_avatar( 'size-full', get_bloginfo( 'name' ) ); ?>
+		</div>
 	</div>
 </section>
 

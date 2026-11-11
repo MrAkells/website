@@ -5,6 +5,7 @@
 
 import { createTrail } from './trail.js';
 import { createLiveServer } from './live.js';
+import { startFace } from './face.js';
 
 const THEMES = [ 'cyan', 'amber', 'green' ];
 const THEME_KEY = 'mrakells-theme';
@@ -25,6 +26,7 @@ document.querySelector( '.site-nav .current-menu-item, .site-nav .current_page_p
 
 startCopyButtons();
 startLocalTime();
+startFace();
 
 /* -------------------------------------------------------------------------
  * Строка ввода

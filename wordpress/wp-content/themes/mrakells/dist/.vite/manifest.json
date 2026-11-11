@@ -20,7 +20,7 @@
     "src": "node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-vietnamese-wght-normal.woff2"
   },
   "src/css/app.css": {
-    "file": "assets/app-D_iZXcvO.css",
+    "file": "assets/app-DHJFfNz5.css",
     "name": "app",
     "names": [
       "app.css"
@@ -41,7 +41,7 @@
     "src": "src/fonts/DepartureMono-Regular.woff2"
   },
   "src/js/app.js": {
-    "file": "assets/app-DB4eRHjw.js",
+    "file": "assets/app-BV_T9413.js",
     "name": "app",
     "src": "src/js/app.js",
     "isEntry": true
