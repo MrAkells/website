@@ -1,6 +1,6 @@
 <?php
 /**
- * Списки записей: блог, рубрики и метки.
+ * Списки записей: блог, рубрики и метки. Список во всю ширину контейнера, как на главной.
  */
 
 global $wp, $wp_query;
@@ -8,7 +8,7 @@ global $wp, $wp_query;
 get_header();
 ?>
 
-<div class="max-w-[52rem]">
+<div>
 	<p class="text-muted"><?php echo esc_html( mrakells_path( home_url( $wp->request ) ) ); ?></p>
 	<h1 class="pixel-shadow mt-3 font-pixel text-pixel-lg text-balance text-bright sm:text-pixel-2xl"><?php echo esc_html( is_home() ? get_the_title( (int) get_option( 'page_for_posts' ) ) : single_term_title( '', false ) ); ?></h1>
 

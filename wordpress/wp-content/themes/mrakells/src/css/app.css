@@ -55,6 +55,15 @@
 	--text-pixel-5xl: 8.25rem;
 	--text-pixel-5xl--line-height: 1;
 
+	/*
+	 * Ширины. У сайта одна ширина страницы — max-w-page на контейнере в header.php;
+	 * шаблоны свою ширину не задают и занимают контейнер целиком. Длинный текст
+	 * ограничивается max-w-measure, а страница с текстом собирается сеткой split:
+	 * колонка текста слева, боковая панель справа.
+	 */
+	--container-page: 76rem;
+	--container-measure: 44rem;
+
 	--animate-blink: blink 1.1s steps(1) infinite;
 
 	@keyframes blink {
@@ -151,6 +160,16 @@
 		4px 0 0 var(--color-line),
 		0 -4px 0 var(--color-line),
 		0 4px 0 var(--color-line);
+}
+
+/* Страница с текстом: колонка шириной measure и боковая панель на остальной ширине контейнера. */
+@utility split {
+	display: grid;
+	gap: 2.5rem 3.5rem;
+
+	@variant lg {
+		grid-template-columns: minmax(0, var(--container-measure)) minmax(0, 1fr);
+	}
 }
 
 /* Заголовок панели: строка с названием окна. */

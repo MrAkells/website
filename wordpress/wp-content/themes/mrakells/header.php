@@ -13,7 +13,7 @@
 <a class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-20 focus:bg-bg focus:px-3 focus:py-1" href="#content"><?php esc_html_e( 'Skip to content', 'mrakells' ); ?></a>
 
 <?php // Нижний отступ — место под закреплённую строку состояния. relative — чтобы содержимое лежало над холстом со следом курсора. ?>
-<div class="relative mx-auto max-w-[76rem] px-5 pb-20 sm:px-8">
+<div class="relative mx-auto max-w-page px-5 pb-20 sm:px-8">
 	<?php // На телефоне шапка в две строки: логотип с языками и под ними вкладки; с планшета — в одну. ?>
 	<header class="flex flex-wrap items-center gap-x-7 gap-y-3 border-b border-line py-4">
 		<a class="flex items-center gap-3 hover:text-accent" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">

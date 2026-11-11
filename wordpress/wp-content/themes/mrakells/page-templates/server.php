@@ -92,7 +92,7 @@ while ( have_posts() ) :
 			<section class="mt-14">
 				<h2 class="prompt text-muted">cat README.md</h2>
 
-				<div class="entry-content mt-5 max-w-[44rem]">
+				<div class="entry-content mt-5 max-w-measure">
 					<?php the_content(); ?>
 				</div>
 			</section>
