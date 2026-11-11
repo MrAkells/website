@@ -1,24 +1,21 @@
-# build output
-dist/
-# generated types
-.astro/
+# В репозитории только свой код: тема, mu-плагин и настройки DDEV.
+# Ядро WordPress, плагины, загрузки и служебные файлы остаются локально.
+/*
+!/.gitignore
+!/README.md
 
-# dependencies
+!/.ddev/
+/.ddev/*
+!/.ddev/config.yaml
+
+!/wordpress/
+/wordpress/*
+!/wordpress/wp-content/
+/wordpress/wp-content/*
+!/wordpress/wp-content/mu-plugins/
+!/wordpress/wp-content/themes/
+/wordpress/wp-content/themes/*
+!/wordpress/wp-content/themes/mrakells/
+
 node_modules/
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
 .DS_Store
-
-# jetbrains setting folder
-.idea/
