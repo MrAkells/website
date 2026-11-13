@@ -61,6 +61,7 @@ return array(
 		'Live map: %s'                             => 'Живая карта: %s',
 
 		// Превью ссылок.
+		'Pavlo Kovalenko, web developer'           => 'Павло Коваленко, веб-разработчик',
 		'Posts from the %s blog.'                  => 'Записи из блога %s.',
 		'Posts tagged #%1$s on %2$s.'              => 'Записи с меткой #%1$s на %2$s.',
 

@@ -377,3 +377,25 @@ add_action(
 	},
 	6
 );
+
+// Рубрики и метки повторяют ленту блога, а у каждой из них по одной-две записи: Google считает
+// такие страницы малоценными дублями. Поэтому они закрыты от индекса (ссылки с них учитываются)
+// и убраны из карты сайта; в выдаче остаются сами записи и /blog/.
+add_filter(
+	'wp_robots',
+	static function ( array $robots ): array {
+		if ( is_category() || is_tag() ) {
+			$robots['noindex'] = true;
+			$robots['follow']  = true;
+		}
+
+		return $robots;
+	}
+);
+
+add_filter(
+	'wp_sitemaps_add_provider',
+	static fn ( $provider, string $name ) => 'taxonomies' === $name ? false : $provider,
+	10,
+	2
+);

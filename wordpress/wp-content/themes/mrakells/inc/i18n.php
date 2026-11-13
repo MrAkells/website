@@ -258,6 +258,20 @@ add_filter(
 	}
 );
 
+// Краткое описание сайта (Настройки → Общие) — одна строка без перевода в базе; оно стоит
+// во вкладке и в выдаче Google после названия, поэтому переводится словарём темы.
+// Поменяли описание в админке — добавьте новую строку в словари, иначе останется английский.
+add_filter(
+	'option_blogdescription',
+	static function ( $value ) {
+		if ( MRAKELLS_DEFAULT_LANG === mrakells_lang() || is_admin() || ! is_string( $value ) ) {
+			return $value;
+		}
+
+		return translate( $value, 'mrakells' ); // phpcs:ignore WordPress.WP.I18n
+	}
+);
+
 /* -------------------------------------------------------------------------
  * Поля SCF
  *
